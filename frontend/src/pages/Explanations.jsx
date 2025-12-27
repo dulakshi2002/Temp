@@ -14,38 +14,47 @@ export default function Explanations() {
   const [concept, setConcept] = useState("");
   const [explanation, setExplanation] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleExplain = async (e) => {
     e.preventDefault();
     if (!concept.trim()) return;
+    setError("");
     setLoading(true);
     setExplanation("");
     try {
       const res = await getExplanation(concept, mode);
       setExplanation(res.explanation || "(No explanation returned)");
-    } catch (err) {
-      setExplanation("Sorry, there was a problem connecting to the explanation service.");
+    } catch {
+      setExplanation("");
+      setError("Sorry, there was a problem connecting to the explanation service.");
     }
     setLoading(false);
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow p-6">
-      <form onSubmit={handleExplain} className="flex gap-2 mb-4">
+    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-0 flex flex-col mt-4">
+      <div className="flex items-center gap-3 px-6 py-4 border-b bg-gradient-to-r from-blue-50 to-blue-100 rounded-t-2xl">
+        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold shadow">EX</div>
+        <div className="font-semibold text-lg text-blue-700">Multi-View Explanations</div>
+      </div>
+      <form onSubmit={handleExplain} className="flex gap-2 px-6 py-4 border-b bg-white">
         <input
-          className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-50"
           placeholder="Enter a concept or topic..."
           value={concept}
           onChange={(e) => setConcept(e.target.value)}
+          disabled={loading}
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition"
+          className="bg-blue-600 text-white px-6 py-2 rounded-full font-semibold hover:bg-blue-700 transition disabled:opacity-60"
+          disabled={loading || !concept.trim()}
         >
-          Explain
+          {loading ? "..." : "Explain"}
         </button>
       </form>
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-2 px-6 py-2 border-b bg-white">
         {explanationModes.map((m) => (
           <button
             key={m.key}
@@ -56,13 +65,21 @@ export default function Explanations() {
             }`}
             onClick={() => setMode(m.key)}
             type="button"
+            disabled={loading}
+            aria-label={`Show ${m.label} explanation`}
           >
             {m.label}
           </button>
         ))}
       </div>
-      <div className="min-h-[80px] bg-gray-50 rounded p-4 text-gray-800">
-        {loading ? <span className="text-blue-500">Generating explanation...</span> : explanation}
+      <div className="min-h-[120px] bg-gray-50 rounded-b-2xl p-6 text-gray-800 flex items-center justify-center text-center text-lg relative">
+        {loading && <span className="text-blue-500 animate-pulse">Generating explanation...</span>}
+        {!loading && explanation && (
+          <span className="block w-full text-gray-800 whitespace-pre-line">{explanation}</span>
+        )}
+        {!loading && error && (
+          <span className="block w-full text-red-500 bg-red-50 border border-red-200 rounded p-2">{error}</span>
+        )}
       </div>
     </div>
   );
