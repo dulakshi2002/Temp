@@ -56,16 +56,16 @@ export default function StudyBuddy() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-0 flex flex-col h-[80vh] border border-gray-100">
-      <div className="flex items-center gap-3 px-6 py-4 border-b bg-gradient-to-r from-blue-50 to-blue-100 rounded-t-2xl">
-        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold shadow">SB</div>
-        <div className="font-semibold text-lg text-blue-700">Study Buddy</div>
+    <div className="max-w-2xl mx-auto bg-white/95 rounded-2xl shadow-2xl p-0 flex flex-col h-[80vh] border border-blue-100 mt-8 backdrop-blur-lg">
+      <div className="flex items-center gap-3 px-6 py-4 border-b bg-gradient-to-r from-blue-100 via-white to-blue-50 rounded-t-2xl">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white text-2xl font-bold shadow-lg">💬</div>
+        <div className="font-extrabold text-xl text-blue-700 tracking-tight">Study Buddy</div>
       </div>
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 bg-gray-50">
         {messages.map((msg, i) => (
           <div key={i} className={`flex items-end gap-2 ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
             {msg.sender === "bot" && (
-              <div className="w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-blue-700 font-bold">🤖</div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-200 to-blue-400 flex items-center justify-center text-blue-700 font-bold shadow">🤖</div>
             )}
             <div
               className={`px-4 py-2 rounded-2xl max-w-[70%] text-sm shadow-sm relative ${
@@ -79,7 +79,7 @@ export default function StudyBuddy() {
               <span className="block text-xs text-gray-400 mt-1 text-right">{msg.time}</span>
             </div>
             {msg.sender === "user" && (
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">🧑</div>
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white font-bold shadow">🧑</div>
             )}
           </div>
         ))}
