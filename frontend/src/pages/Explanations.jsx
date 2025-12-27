@@ -33,10 +33,10 @@ export default function Explanations() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-100 p-0 flex flex-col mt-4">
-      <div className="flex items-center gap-3 px-6 py-4 border-b bg-gradient-to-r from-blue-50 to-blue-100 rounded-t-2xl">
-        <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white text-xl font-bold shadow">EX</div>
-        <div className="font-semibold text-lg text-blue-700">Multi-View Explanations</div>
+    <div className="max-w-2xl mx-auto bg-white/95 rounded-2xl shadow-2xl border border-blue-100 p-0 flex flex-col mt-8 backdrop-blur-lg">
+      <div className="flex items-center gap-3 px-6 py-4 border-b bg-gradient-to-r from-blue-100 via-white to-blue-50 rounded-t-2xl">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-700 flex items-center justify-center text-white text-2xl font-bold shadow-lg">💡</div>
+        <div className="font-extrabold text-xl text-blue-700 tracking-tight">Multi-View Explanations</div>
       </div>
       <form onSubmit={handleExplain} className="flex gap-2 px-6 py-4 border-b bg-white">
         <input
