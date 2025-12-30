@@ -1,28 +1,59 @@
 # Python
+
 __pycache__/
+
 *.pyc
+
 *.pyo
 
+
+
 # Virtual environments
+
 venv/
+
 env/
+
 .venv/
 
+
+
 # ML models
+
 models/
+
 *.safetensors
+
 *.pt
+
 *.pth
+
 *.bin
 
+
+
 # HuggingFace / cache
+
 .cache/
+
 models/
 
+
+
 # OS
+
 .DS_Store
+
 Thumbs.db
 
+
+
 # Environment variables
-.env
-.env.*
+
+config.bat
+
+node_modules
+
+temp_auto_push.bat
+
+temp_interactive_push.bat
